@@ -77,8 +77,8 @@ class CommandHandlerTests : KoinTest {
 private var springTestCounter = 0
 private var springAsyncTestCounter = 0
 
-class NonExistCommand : Command
-class MyCommand : Command
+class NonExistCommand(override val commandMetadata: CommandMetadata? = null) : Command
+class MyCommand(override val commandMetadata: CommandMetadata? = null) : Command
 
 class MyCommandHandler(
     val commandBus: CommandBus

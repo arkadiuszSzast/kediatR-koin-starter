@@ -85,8 +85,8 @@ class CommandWithResultHandlerTest : KoinTest {
 
 class Result
 
-class NonExistCommandR : CommandWithResult<Result>
-class MyCommandR : CommandWithResult<Result>
+class NonExistCommandR(override val commandMetadata: CommandMetadata? = null) : CommandWithResult<Result>
+class MyCommandR(override val commandMetadata: CommandMetadata? = null) : CommandWithResult<Result>
 
 class MyCommandRHandler(
     val commandBus: CommandBus
