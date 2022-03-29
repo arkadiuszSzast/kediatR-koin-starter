@@ -7,7 +7,7 @@
 
     <groupId>com.trendyol</groupId>
     <artifactId>kediatr-koin-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>com.github.arkadiuszSzast</groupId>
             <artifactId>kediatR-core</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.7</version>
         </dependency>
         <dependency>
             <groupId>io.insert-koin</groupId>
