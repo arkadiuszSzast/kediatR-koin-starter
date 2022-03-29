@@ -65,7 +65,7 @@ class PipelineBehaviorTest: KoinTest {
 
 }
 
-class MyBrokenCommand(override val commandMetadata: CommandMetadata? = null) : Command
+class MyBrokenCommand(override val metadata: CommandMetadata? = null) : Command
 
 class MyBrokenHandler(
     private val commandBus: CommandBus
