@@ -9,14 +9,20 @@ import org.reflections.Reflections
 import kotlin.reflect.KClass
 
 @OptIn(KoinInternalApi::class)
-class KediatrKoinProvider : DependencyProvider {
+class KediatrKoinProvider(basePackage: String? = null) : DependencyProvider {
     private val koin = getKoin()
     private var reflections: Reflections
 
     init {
-        val aPackage = koin.instanceRegistry.instances.entries.map { it.value.beanDefinition.definition.getScopeName().type.java.`package` }.first().name
-        val mainPackageName = Package.getPackages().filter { aPackage.startsWith(it.name) }.map { it.name }
-        reflections = Reflections(mainPackageName)
+        if (basePackage != null) {
+            reflections = Reflections(basePackage)
+        } else {
+            val aPackage =
+                koin.instanceRegistry.instances.entries.map { it.value.beanDefinition.definition.getScopeName().type.java.`package` }
+                    .first().name
+            val mainPackageName = Package.getPackages().filter { aPackage.startsWith(it.name) }.map { it.name }
+            reflections = Reflections(mainPackageName)
+        }
     }
 
     override fun <T> getSingleInstanceOf(clazz: Class<T>): T {
@@ -34,6 +40,6 @@ class KediatrKoinProvider : DependencyProvider {
 
 class KediatrKoin {
     companion object {
-        fun getCommandBus() = CommandBusBuilder(KediatrKoinProvider()).build()
+        fun getCommandBus(basePackage: String? = null) = CommandBusBuilder(KediatrKoinProvider(basePackage)).build()
     }
 }
